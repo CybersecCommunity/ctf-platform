@@ -7,7 +7,7 @@ const JWT_SECRET = new TextEncoder().encode(
 )
 
 export async function generateToken(user: User): Promise<string> {
-  const payload: UserSession = {
+  const payload: UserSession & { [key: string]: any } = {
     id: user._id!.toString(),
     username: user.username,
     email: user.email,
@@ -26,7 +26,14 @@ export async function generateToken(user: User): Promise<string> {
 export async function verifyToken(token: string): Promise<UserSession | null> {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET)
-    return payload as UserSession
+    return {
+      id: payload.id as string,
+      username: payload.username as string,
+      email: payload.email as string,
+      role: payload.role as 'admin' | 'participant',
+      score: payload.score as number,
+      flag: payload.flag as string
+    }
   } catch (error) {
     console.error('Token verification failed:', error)
     return null

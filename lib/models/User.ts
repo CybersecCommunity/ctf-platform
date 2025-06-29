@@ -18,5 +18,6 @@ export interface UserSession {
   email: string
   role: 'admin' | 'participant'
   score: number
-  flag: string
+  flag: string 
+  [key: string]: any // Add index signature for jose compatibility
 }

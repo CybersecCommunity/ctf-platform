@@ -9,6 +9,7 @@ export interface Challenge {
   points: number
   flag: string
   hints: string[]
+  links?: { title: string; url: string }[]
   solvedBy: string[]
   isActive: boolean
   createdAt: Date

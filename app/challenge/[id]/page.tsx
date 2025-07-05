@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { ArrowLeft, Trophy, Flag, Lightbulb, Users, CheckCircle } from 'lucide-react'
+import { ArrowLeft, Trophy, Flag, Lightbulb, Users, CheckCircle, ChevronRight } from 'lucide-react'
 import { Challenge } from '@/lib/models/Challenge'
 import { UserSession } from '@/lib/models/User'
 
@@ -14,6 +14,7 @@ export default function ChallengePage() {
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const [showHints, setShowHints] = useState(false)
+  const [currentHintIndex, setCurrentHintIndex] = useState(0)
   const router = useRouter()
   const params = useParams()
 
@@ -90,6 +91,16 @@ export default function ChallengePage() {
     } finally {
       setSubmitting(false)
     }
+  }
+
+  const showNextHint = () => {
+    if (challenge?.hints && currentHintIndex < challenge.hints.length - 1) {
+      setCurrentHintIndex(currentHintIndex + 1)
+    }
+  }
+
+  const resetHints = () => {
+    setCurrentHintIndex(0)
   }
 
   const getDifficultyColor = (difficulty: string) => {
@@ -185,7 +196,7 @@ export default function ChallengePage() {
               </div>
             </div>
 
-            {/* Hints Section */}
+            {/* Progressive Hints Section */}
             {challenge.hints && challenge.hints.length > 0 && (
               <div className="mb-6">
                 <button
@@ -198,16 +209,99 @@ export default function ChallengePage() {
                 
                 {showHints && (
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                    <h4 className="font-medium text-yellow-800 mb-2">Hints:</h4>
-                    <ul className="space-y-1">
-                      {challenge.hints.map((hint, index) => (
-                        <li key={index} className="text-yellow-700 text-sm">
-                          {index + 1}. {hint}
-                        </li>
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-medium text-yellow-800">
+                        Hint {currentHintIndex + 1} of {challenge.hints.length}
+                      </h4>
+                      <div className="flex items-center space-x-2">
+                        {currentHintIndex > 0 && (
+                          <button
+                            onClick={resetHints}
+                            className="text-xs text-yellow-600 hover:text-yellow-700 underline"
+                          >
+                            Reset
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {/* Show hints progressively */}
+                      {challenge.hints.slice(0, currentHintIndex + 1).map((hint, index) => (
+                        <div 
+                          key={index} 
+                          className={`p-3 rounded-md ${
+                            index === currentHintIndex 
+                              ? 'bg-yellow-100 border border-yellow-300' 
+                              : 'bg-yellow-75 border border-yellow-200'
+                          }`}
+                        >
+                          <div className="flex items-start space-x-2">
+                            <span className="text-yellow-600 font-medium text-sm">
+                              {index + 1}.
+                            </span>
+                            <span className="text-yellow-700 text-sm flex-1">
+                              {hint}
+                            </span>
+                          </div>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
+
+                    {/* Show next hint button */}
+                    {currentHintIndex < challenge.hints.length - 1 && (
+                      <div className="mt-4 pt-3 border-t border-yellow-200">
+                        <button
+                          onClick={showNextHint}
+                          className="flex items-center space-x-2 text-yellow-700 hover:text-yellow-800 font-medium text-sm transition-colors"
+                        >
+                          <span>Show next hint</span>
+                          <ChevronRight className="h-4 w-4" />
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Progress indicator */}
+                    <div className="mt-4 pt-3 border-t border-yellow-200">
+                      <div className="flex space-x-1">
+                        {challenge.hints.map((_, index) => (
+                          <div
+                            key={index}
+                            className={`h-2 w-8 rounded-full ${
+                              index <= currentHintIndex 
+                                ? 'bg-yellow-400' 
+                                : 'bg-yellow-200'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 )}
+              </div>
+            )}
+
+            {challenge.links && challenge.links.length > 0 && (
+              <div className="border-t pt-6 mb-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <Lightbulb className="h-5 w-5 mr-2" />
+                  Helpful links
+                </h3>
+
+                <ul className="list-disc list-inside space-y-2 text-blue-600">
+                  {challenge.links.map((link, index) => (
+                    <li key={index}>
+                      <a 
+                        href={link.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hover:underline"
+                      >
+                        {link.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 

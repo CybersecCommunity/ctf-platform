@@ -34,6 +34,10 @@ async function revealTheFlag() {
   }
 }
 
+if (typeof window !== 'undefined') {
+  window.revealTheFlag = revealTheFlag
+}
+
 export default function XSSChallenge() {
   const [query, setQuery] = useState('')
   const [result, setResult] = useState('')
@@ -43,8 +47,6 @@ export default function XSSChallenge() {
 
   useEffect(() => {
     fetchUser()
-    // Make revealTheFlag globally accessible for the XSS challenge
-    window.revealTheFlag = revealTheFlag
   }, [])
 
   useEffect(() => {

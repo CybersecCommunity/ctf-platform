@@ -4,6 +4,12 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Search, AlertTriangle, Shield } from 'lucide-react'
 
+declare global {
+  interface Window {
+    revealTheFlag: () => void
+  }
+}
+
 // Function to fetch and reveal the flag via API
 async function revealTheFlag() {
   try {

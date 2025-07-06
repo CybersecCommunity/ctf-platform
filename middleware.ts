@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
   if (!token || !(await verifyToken(token))) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
-
+  console.log('User authenticated, proceeding to:', pathname)
   return NextResponse.next()
 }
 

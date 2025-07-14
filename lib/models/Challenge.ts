@@ -9,7 +9,7 @@ export interface Challenge {
   difficulty: 'easy' | 'medium' | 'hard'
   points: number
   flag: string
-  hints: string[]
+  hints?: string[]
   links?: { title: string; url: string }[]
   solvedBy: string[]
   isActive: boolean

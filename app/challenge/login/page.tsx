@@ -35,7 +35,7 @@ export default function SQLiChallengePage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
-      <h1 className="text-2xl font-bold mb-6">Vulnerable Login (SQLi Challenge)</h1>
+      <h1 className="text-2xl font-bold mb-6">Vulnerable Login</h1>
       <form onSubmit={handleLogin} className="space-y-4 w-full max-w-sm">
         <input
           type="text"

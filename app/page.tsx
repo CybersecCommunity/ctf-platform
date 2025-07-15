@@ -14,7 +14,7 @@ export default function HomePage() {
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Test your cybersecurity skills in our Capture The Flag competition. 
-            Solve challenges, earn points, and climb the leaderboard. Will be available from <strong>16th July 2025, 12 AM</strong>.
+            Solve challenges, earn points, and climb the leaderboard.
           </p>
           <div className="flex gap-4 justify-center">
             <Link href="/login" className="btn-primary text-lg px-8 py-3">

@@ -158,7 +158,7 @@ export default function ChallengePage() {
             <span>Back to Dashboard</span>
           </button>
         </div>
-
+        <div className='CTF{view_source_is_useful}' style={{display: "none"}}></div>
         <div className="max-w-4xl mx-auto">
           <div className="card mb-6">
             <div className="flex items-start justify-between mb-6">

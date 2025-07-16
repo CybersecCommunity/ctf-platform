@@ -37,11 +37,12 @@ export default function DashboardPage() {
 
   const fetchChallenges = async () => {
     try {
-      const response = await fetch('/api/challenges')
-      if (response.ok) {
-        const challengesData = await response.json()
-        setChallenges(challengesData)
-      }
+      // const response = await fetch('/api/challenges')
+      // if (response.ok) {
+      //   const challengesData = await response.json()
+      //   setChallenges(challengesData)
+      // }
+      setChallenges([])
     } catch (error) {
       console.error('Error fetching challenges:', error)
     } finally {

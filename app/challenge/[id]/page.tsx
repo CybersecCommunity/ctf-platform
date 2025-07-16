@@ -25,13 +25,14 @@ export default function ChallengePage() {
 
   const fetchChallenge = async () => {
     try {
-      const response = await fetch(`/api/challenges/${params.id}`)
-      if (response.ok) {
-        const challengeData = await response.json()
-        setChallenge(challengeData)
-      } else {
-        router.push('/dashboard')
-      }
+      // const response = await fetch(`/api/challenges/${params.id}`)
+      // if (response.ok) {
+      //   const challengeData = await response.json()
+      //   setChallenge(challengeData)
+      // } else {
+      //   router.push('/dashboard')
+      // }
+      router.push('/dashboard') // Temporary redirect to dashboard
     } catch (error) {
       console.error('Error fetching challenge:', error)
       router.push('/dashboard')
@@ -60,32 +61,33 @@ export default function ChallengePage() {
     setMessage(null)
 
     try {
-      const response = await fetch('/api/challenges/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          challengeId: params.id,
-          flag: flag.trim()
-        }),
-      })
+      // const response = await fetch('/api/challenges/submit', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     challengeId: params.id,
+      //     flag: flag.trim()
+      //   }),
+      // })
 
-      const data = await response.json()
+      // const data = await response.json()
 
-      if (response.ok) {
-        if (data.correct) {
-          setMessage({ type: 'success', text: `Correct! You earned ${challenge?.points} points!` })
-          setFlag('')
-          // Refresh challenge data to show it's solved
-          fetchChallenge()
-          fetchUser()
-        } else {
-          setMessage({ type: 'error', text: 'Incorrect flag. Try again!' })
-        }
-      } else {
-        setMessage({ type: 'error', text: data.error || 'Submission failed' })
-      }
+      // if (response.ok) {
+      //   if (data.correct) {
+      //     setMessage({ type: 'success', text: `Correct! You earned ${challenge?.points} points!` })
+      //     setFlag('')
+      //     // Refresh challenge data to show it's solved
+      //     fetchChallenge()
+      //     fetchUser()
+      //   } else {
+      //     setMessage({ type: 'error', text: 'Incorrect flag. Try again!' })
+      //   }
+      // } else {
+      //   setMessage({ type: 'error', text: data.error || 'Submission failed' })
+      // }
+      setMessage({ type: 'error', text: "Submissions closed"})
     } catch (error) {
       setMessage({ type: 'error', text: 'An error occurred. Please try again.' })
     } finally {

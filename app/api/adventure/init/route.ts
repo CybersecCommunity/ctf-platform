@@ -21,6 +21,7 @@ export async function GET(req: NextRequest) {
     httpOnly: true,
     path: '/',
   });
+  res.headers.set('Cache-Control', 'no-store');
 
   return res;
 }

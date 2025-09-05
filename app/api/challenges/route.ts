@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
       const { flag, ...safeChallenge } = challenge
       return safeChallenge
     })
-
+    // console.log(safeChallenges)
     return NextResponse.json(safeChallenges)
   } catch (error) {
     console.error('Error fetching challenges:', error)

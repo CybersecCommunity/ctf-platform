@@ -11,7 +11,7 @@ export default function DashboardPage() {
   const [challenges, setChallenges] = useState<Challenge[]>([])
   const [leaderboard, setLeaderboard] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<'challenges' | 'leaderboard'>('leaderboard')
+  const [activeTab, setActiveTab] = useState<'challenges' | 'leaderboard'>('challenges')
   const router = useRouter()
 
   useEffect(() => {
@@ -37,12 +37,12 @@ export default function DashboardPage() {
 
   const fetchChallenges = async () => {
     try {
-      // const response = await fetch('/api/challenges')
-      // if (response.ok) {
-      //   const challengesData = await response.json()
-      //   setChallenges(challengesData)
-      // }
-      setChallenges([])
+      const response = await fetch('/api/challenges')
+      if (response.ok) {
+        const challengesData = await response.json()
+        console.log('Challenges fetched:', challengesData)
+        setChallenges(challengesData)
+      }
     } catch (error) {
       console.error('Error fetching challenges:', error)
     } finally {

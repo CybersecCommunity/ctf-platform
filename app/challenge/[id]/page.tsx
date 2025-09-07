@@ -86,7 +86,6 @@ export default function ChallengePage() {
       } else {
         setMessage({ type: 'error', text: data.error || 'Submission failed' })
       }
-      setMessage({ type: 'error', text: "Submissions closed"})
     } catch (error) {
       setMessage({ type: 'error', text: 'An error occurred. Please try again.' })
     } finally {

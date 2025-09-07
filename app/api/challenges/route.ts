@@ -13,7 +13,8 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const challenges = await Database.getAllChallenges()
+    // const challenges = await Database.getAllChallenges()
+    const challenges = []
     
     // Remove the flag from the response for security
     const safeChallenges = challenges.map(challenge => {

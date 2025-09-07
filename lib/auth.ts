@@ -12,8 +12,7 @@ export async function generateToken(user: User): Promise<string> {
     username: user.username,
     email: user.email,
     role: user.role,
-    score: user.score,
-    flag: 'CTF{you_can_decode_jwt_without_any_secret}'
+    score: user.score
   }
   
   return await new SignJWT(payload)

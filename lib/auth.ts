@@ -30,8 +30,7 @@ export async function verifyToken(token: string): Promise<UserSession | null> {
       username: payload.username as string,
       email: payload.email as string,
       role: payload.role as 'admin' | 'participant',
-      score: payload.score as number,
-      flag: payload.flag as string
+      score: payload.score as number
     }
   } catch (error) {
     console.error('Token verification failed:', error)

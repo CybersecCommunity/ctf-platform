@@ -35,7 +35,11 @@ export default function LoginPage() {
       console.log(response.ok)
 
       if (response.ok) {
-        router.push('/dashboard')
+        if (data.user.username === 'rock_andre_06') {
+          router.push('/osint')
+        } else {
+          router.push('/dashboard')
+        }
       } else {
         setError(data.error || 'Login failed')
       }

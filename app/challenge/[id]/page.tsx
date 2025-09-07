@@ -19,7 +19,8 @@ export default function ChallengePage() {
   const params = useParams()
 
   useEffect(() => {
-    fetchChallenge()
+    // fetchChallenge()
+    router.push('/dashboard') // Redirecting to dashboard as individual challenge view is disabled
     fetchUser()
   }, [params.id])
 

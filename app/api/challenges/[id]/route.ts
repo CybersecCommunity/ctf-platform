@@ -16,7 +16,8 @@ export async function GET(
       )
     }
 
-    const challenge = await Database.getChallengeById(params.id)
+    // const challenge = await Database.getChallengeById(params.id)
+    const challenge = {}
     
     if (!challenge) {
       return NextResponse.json(

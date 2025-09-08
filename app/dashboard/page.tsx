@@ -11,7 +11,7 @@ export default function DashboardPage() {
   const [challenges, setChallenges] = useState<Challenge[]>([])
   const [leaderboard, setLeaderboard] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<'challenges' | 'leaderboard'>('leaderboard')
+  const [activeTab, setActiveTab] = useState<'challenges' | 'leaderboard'>('challenges')
   const router = useRouter()
 
   useEffect(() => {

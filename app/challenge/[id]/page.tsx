@@ -323,7 +323,8 @@ export default function ChallengePage() {
                   Submit Flag
                 </h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                {/* <form onSubmit={handleSubmit} className="space-y-4"> */}
+                <form className="space-y-4">
                   {message && (
                     <div className={`px-4 py-3 rounded-lg ${
                       message.type === 'success' 
